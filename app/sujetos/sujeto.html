@@ -1,0 +1,71 @@
+
+
+<div ng-controller="SujetoCtrl">
+  <div class='row'>
+    <nav-bar></nav-bar>
+  </div>
+    <div ng-show="!isSelected">
+      <div class="row">
+        <div class='col-xs-12' align='center'>
+          <button class="btn btn-default" ng-click="addNew()">AGREGAR NUEVO</button>
+        </div>
+      </div>
+      <div class="row" align='center'>
+        <div class='col-xs-12'>
+          <p>Seleccione usuario para editar</p>
+          <table class='table table-stripped'>
+            <thead><td>Apellido</td><td>Nombre</td><td>DNI</td><td>Fecha de Nac.</td></thead>
+            <tr ng-repeat="s in subjectList">
+              <td>{{s.lastname}}</td>
+              <td>{{s.firstname}}</td>
+              <td>{{s.dni}}</td>
+              <td>{{changeDate(s.birthdate)}}</td>
+              <td><a href="" ng-click="editSubject(s)"><span class="glyphicon glyphicon-edit" title="EDITAR" aria-hidden="true"></span></a></td>
+              <td><a href="" ng-click="deleteSubject(s)"><span class="glyphicon glyphicon-remove" title="ELIMINAR" aria-hidden="true"></span></a></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div ng-show="isSelected">
+      <div class="row" align='center'>
+        <div class='col-xs-12' >
+          <form name="userForm" novalidate>
+            <p><strong>Ingrese datos del sujeto:</strong></p>
+            <div class="form-group">
+              Apellido:
+              <input type="text" class="form-control" ng-model="subject.lastname" name="lastname" required />
+            </div>
+            <div class="form-group">
+              Nombre: 
+              <input type="text" class="form-control" ng-model="subject.firstname" name="firstname" required />
+              
+            </div>
+            <div class="form-group">
+              DNI: 
+              <input type="text" class="form-control" ng-model="subject.dni" name="dni" />
+            </div>
+            <div class="form-group">
+              Fecha de Nacimiento: 
+              <input type="text" id="datepicker" class="form-control" name="date" required />
+            </div>
+            <div class="form-group">
+                TAREAS
+            </div>
+            <div class="form-group">
+              <input type="hidden" ng-model="subject.id"/>
+              <button class="btn btn-default" ng-click="goBack()">VOLVER ATRAS</button>
+              <button type="submit" class="btn btn-primary" ng-click="saveChanges()">GUARDAR CAMBIOS</button>
+              <button type="submit" class="btn btn-primary" ng-click="saveChanges()">GUARDAR Y EVALUAR</button>
+            </div>
+          </form> 
+        </div>
+      </div>
+    </div>
+</div>
+
+<script>
+$(function() {
+  $( "#datepicker" ).datepicker();
+});
+</script>
